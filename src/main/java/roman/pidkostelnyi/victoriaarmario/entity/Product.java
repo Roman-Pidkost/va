@@ -28,7 +28,7 @@ public class Product {
     @ManyToOne
     private Subcategory subcategory;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
 
     @ManyToMany

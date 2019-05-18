@@ -13,17 +13,21 @@ import java.time.LocalDateTime;
 public class CommentResponse {
 
     private Long id;
+    private String username;
     private String text;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime timePosted;
+    private LocalDateTime datePosted;
+    private Boolean show;
 
     @JsonProperty("product")
     private ProductResponse productResponse;
 
     public CommentResponse(Comment comment) {
         id = comment.getId();
+        username = comment.getUsername();
         text = comment.getText();
-        timePosted = comment.getTimePosted();
+        datePosted = comment.getDatePosted();
         productResponse = new ProductResponse(comment.getProduct());
+        show = comment.getShow();
     }
 }

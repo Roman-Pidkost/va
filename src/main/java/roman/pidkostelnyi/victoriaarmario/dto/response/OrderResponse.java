@@ -24,6 +24,7 @@ public class OrderResponse {
     private String email;
     private String address;
     private String comment;
+    private Long sum;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime posted;
