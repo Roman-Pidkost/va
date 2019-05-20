@@ -59,7 +59,7 @@ public class ColorService {
             color = new Color();
         }
         color.setName(request.getName());
-        if (color.getImage() != null) {
+        if (request.getImage() != null) {
             color.setImage(fileTool.saveFile(request.getImage(), imgDirectory));
         }
         return color;

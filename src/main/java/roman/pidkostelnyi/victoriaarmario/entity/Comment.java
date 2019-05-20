@@ -27,7 +27,7 @@ public class Comment {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime datePosted;
 
-    private Boolean show;
+    private Boolean hidden;
 
     @ManyToOne
     private Product product;

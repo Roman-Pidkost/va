@@ -62,7 +62,7 @@ public class SubcategoryService {
         }
         subcategory.setName(request.getName());
         subcategory.setCategory(categoryService.findOne(request.getCategoryId()));
-        if (subcategory.getImage() != null) {
+        if (request.getImage() != null) {
             subcategory.setImage(fileTool.saveFile(request.getImage(), imgDirectory));
         }
         return subcategory;

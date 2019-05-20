@@ -3,7 +3,6 @@ package roman.pidkostelnyi.victoriaarmario.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import roman.pidkostelnyi.victoriaarmario.dto.request.CommentRequest;
-import roman.pidkostelnyi.victoriaarmario.dto.response.ColorResponse;
 import roman.pidkostelnyi.victoriaarmario.dto.response.CommentResponse;
 import roman.pidkostelnyi.victoriaarmario.entity.Comment;
 import roman.pidkostelnyi.victoriaarmario.repository.CommentRepository;
@@ -55,6 +54,7 @@ public class CommentService {
     private Comment commentRequestToComment(Comment comment, CommentRequest request) {
         if (comment == null) {
             comment = new Comment();
+            comment.setHidden(true);
             comment.setDatePosted(LocalDateTime.now(ZoneId.of(KIEV_ZONE)));
         }
         comment.setUsername(request.getUsername());

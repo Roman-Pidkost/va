@@ -57,7 +57,7 @@ public class CategoryService {
             category = new Category();
         }
         category.setName(request.getName());
-        if (category.getImage() != null) {
+        if (request.getImage() != null) {
             category.setImage(fileTool.saveFile(request.getImage(), imgDirectory));
         }
         return category;
