@@ -9,6 +9,8 @@ import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.UUID;
 
+import static roman.pidkostelnyi.victoriaarmario.tool.Constants.*;
+
 @Service
 public class FileTool {
 
@@ -28,17 +30,21 @@ public class FileTool {
         return fileName;
     }
 
+    public boolean deleteFile(String directory, String fileName) {
+        return Paths.get(System.getProperty(USER_HOME), directory, fileName).toFile().delete();
+    }
+
     private String createFileName(String fileExtension) {
         String fileName = UUID.randomUUID().toString();
-        return String.format(Constants.FULL_IMAGE_NAME_FORMAT, fileName, fileExtension);
+        return String.format(FULL_IMAGE_NAME_FORMAT, fileName, fileExtension);
     }
 
     private String getFileExtensionFromMetaInfo(String metaInfo) {
-        return metaInfo.split(Constants.SLASH)[1].split(Constants.SEMICOLON)[0];
+        return metaInfo.split(SLASH)[1].split(SEMICOLON)[0];
     }
 
     private Path getPathToDirectory(String directory) throws IOException {
-        Path path = Paths.get(System.getProperty(Constants.USER_HOME), directory);
+        Path path = Paths.get(System.getProperty(USER_HOME), directory);
         if (!Files.exists(path)) {
             Files.createDirectory(path);
         }

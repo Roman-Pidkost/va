@@ -34,23 +34,34 @@ public class OrderService {
     private ProductService productService;
 
     public void save(OrderRequest request) {
-        Order order = orderRepository.save(orderRequestToOrder(null, request));
+        final Order order = orderRepository.save(orderRequestToOrder(null, request));
         saveProductsForOrder(order, request);
     }
 
     public PageResponse<OrderResponse> findAll(OrderSearchRequest request) {
-        Page<Order> page = orderRepository.findAll(new OrderSpecification(request), request.getPaginationRequest().toPageable());
+        final Page<Order> page = orderRepository.findAll(new OrderSpecification(request), request.getPagination().toPageable());
         return new PageResponse<>(page.get().map(OrderResponse::new).collect(Collectors.toList()), page.getTotalPages(), page.getTotalElements());
     }
 
     public void update(Long id, OrderRequest request) {
-        Order order = orderRepository.save(orderRequestToOrder(findOne(id), request));
+        final Order order = orderRepository.save(orderRequestToOrder(findOne(id), request));
         saveProductsForOrder(order, request);
     }
 
+    public void archive(Long id) {
+        final Order order = findOne(id);
+        order.setDone(LocalDateTime.now(ZoneId.of(KIEV_ZONE)));
+        orderRepository.save(order);
+    }
+
+    public void unarchive(Long id) {
+        final Order order = findOne(id);
+        order.setDone(null);
+        orderRepository.save(order);
+    }
+
     public void delete(Long id) {
-        Order order = findOne(id);
-        orderRepository.delete(order);
+        orderRepository.delete(findOne(id));
     }
 
     public Order findOne(Long id) {
@@ -72,8 +83,6 @@ public class OrderService {
         productForOrderRepository.deleteAll(order.getProductsForOrder());
         List<ProductForOrder> productsForOrder = request.getProducts().stream().map(p -> productForOrderRequestToProductForOrder(order, p)).collect(Collectors.toList());
         productForOrderRepository.saveAll(productsForOrder);
-//        order.setProductsForOrder(productsForOrder);
-//        return order;
     }
 
     private ProductForOrder productForOrderRequestToProductForOrder(Order order, ProductForOrderRequest request) {

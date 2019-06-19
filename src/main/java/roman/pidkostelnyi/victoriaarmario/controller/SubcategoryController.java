@@ -7,7 +7,6 @@ import roman.pidkostelnyi.victoriaarmario.dto.response.SubcategoryResponse;
 import roman.pidkostelnyi.victoriaarmario.service.SubcategoryService;
 
 import javax.validation.Valid;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -27,8 +26,8 @@ public class SubcategoryController {
     }
 
     @GetMapping
-    public List<SubcategoryResponse> findAllByCategoryId(Long categoryId) {
-        return subcategoryService.findAllByCategoryId(categoryId);
+    public List<SubcategoryResponse> findAll() {
+        return subcategoryService.findAll();
     }
 
     @PutMapping

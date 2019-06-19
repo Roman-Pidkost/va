@@ -35,6 +35,16 @@ public class OrderController {
         orderService.update(id, request);
     }
 
+    @PutMapping("/archive")
+    public void archive(Long id) {
+        orderService.archive(id);
+    }
+
+    @PutMapping("/unarchive")
+    public void unarchive(Long id) {
+        orderService.unarchive(id);
+    }
+
     @DeleteMapping
     public void delete(Long id) {
         orderService.delete(id);

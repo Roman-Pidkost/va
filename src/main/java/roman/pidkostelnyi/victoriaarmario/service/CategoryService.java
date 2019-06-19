@@ -12,11 +12,8 @@ import roman.pidkostelnyi.victoriaarmario.tool.Constants;
 import roman.pidkostelnyi.victoriaarmario.tool.FileTool;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static roman.pidkostelnyi.victoriaarmario.tool.Constants.USER_HOME;
 
 @Service
 public class CategoryService {
@@ -44,8 +41,12 @@ public class CategoryService {
 
     public void delete(Long id) {
         Category category = findOne(id);
-        categoryRepository.delete(category);
-        Paths.get(System.getProperty(USER_HOME), imgDirectory, category.getImage()).toFile().delete();
+        if (category.getSubcategories().isEmpty()) {
+            categoryRepository.delete(category);
+            fileTool.deleteFile(imgDirectory, category.getImage());
+        } else {
+            throw new IllegalArgumentException("Category cannot be deleted");
+        }
     }
 
     public Category findOne(Long id) {

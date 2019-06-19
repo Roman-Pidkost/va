@@ -9,9 +9,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -20,8 +19,8 @@ public class OrderSpecification implements Specification<Order> {
     private Long minSum;
     private Long maxSum;
 
-    private LocalDateTime dateFrom;
-    private LocalDateTime dateTo;
+    private Date dateFrom;
+    private Date dateTo;
 
     public OrderSpecification(OrderSearchRequest request) {
         minSum = request.getMinSum();

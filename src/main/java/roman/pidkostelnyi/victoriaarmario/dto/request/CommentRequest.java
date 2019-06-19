@@ -14,5 +14,5 @@ public class CommentRequest {
     private String text;
     @NotNull
     private Long productId;
-    private Boolean show;
+    private Boolean hidden;
 }

@@ -36,7 +36,7 @@ public class CommentService {
     }
 
     public List<CommentResponse> findAllToShowByProductId(Long productId) {
-        return commentRepository.findAllByProductIdAndShowIsTrue(productId).stream().map(CommentResponse::new).collect(Collectors.toList());
+        return commentRepository.findAllByProductIdAndHiddenIsFalse(productId).stream().map(CommentResponse::new).collect(Collectors.toList());
     }
 
     public void update(Long id, CommentRequest request) {
@@ -56,6 +56,8 @@ public class CommentService {
             comment = new Comment();
             comment.setHidden(true);
             comment.setDatePosted(LocalDateTime.now(ZoneId.of(KIEV_ZONE)));
+        } else {
+            comment.setHidden(request.getHidden());
         }
         comment.setUsername(request.getUsername());
         comment.setText(request.getText());
