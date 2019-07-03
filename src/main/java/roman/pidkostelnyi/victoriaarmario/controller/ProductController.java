@@ -32,8 +32,8 @@ public class ProductController {
         return productService.findAll();
     }
 
-    @GetMapping("/page")
-    public PageResponse<ProductResponse> findAllByCriteria(ProductCriteriaRequest request) {
+    @PostMapping("/page")
+    public PageResponse<ProductResponse> findAllByCriteria(@Valid @RequestBody ProductCriteriaRequest request) {
         return productService.findAll(request);
     }
 

@@ -9,6 +9,7 @@ import java.util.Date;
 @Setter
 public class OrderSearchRequest {
     private String value;
+    private Boolean done;
     private Long minSum;
     private Long maxSum;
     private Date dateFrom;

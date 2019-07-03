@@ -30,6 +30,11 @@ public class SubcategoryController {
         return subcategoryService.findAll();
     }
 
+    @GetMapping("/byCategory")
+    public List<SubcategoryResponse> findAllByCategory(Long categoryId) {
+        return subcategoryService.findAllByCategory(categoryId);
+    }
+
     @PutMapping
     public void update(Long id, @Valid @RequestBody SubcategoryRequest request) throws IOException {
         subcategoryService.update(id, request);

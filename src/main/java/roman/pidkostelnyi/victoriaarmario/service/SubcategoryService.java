@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import roman.pidkostelnyi.victoriaarmario.dto.request.SubcategoryRequest;
 import roman.pidkostelnyi.victoriaarmario.dto.response.SubcategoryResponse;
 import roman.pidkostelnyi.victoriaarmario.entity.Subcategory;
@@ -36,6 +37,11 @@ public class SubcategoryService {
 
     public List<SubcategoryResponse> findAll() {
         return subcategoryRepository.findAll(Sort.by(Sort.Direction.ASC, "category.name")).stream().map(SubcategoryResponse::new).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<SubcategoryResponse> findAllByCategory(Long categoryId) {
+        return subcategoryRepository.findAllByCategoryId(categoryId).map(SubcategoryResponse::new).collect(Collectors.toList());
     }
 
     public void update(Long id, SubcategoryRequest request) throws IOException {

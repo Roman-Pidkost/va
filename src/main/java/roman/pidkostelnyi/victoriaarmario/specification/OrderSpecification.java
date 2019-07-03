@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static roman.pidkostelnyi.victoriaarmario.tool.Constants.PERCENT;
+
 @AllArgsConstructor
 public class OrderSpecification implements Specification<Order> {
 
@@ -22,17 +24,25 @@ public class OrderSpecification implements Specification<Order> {
     private Date dateFrom;
     private Date dateTo;
 
+    private String value;
+
+    private Boolean done;
+
     public OrderSpecification(OrderSearchRequest request) {
         minSum = request.getMinSum();
         maxSum = request.getMaxSum();
         dateFrom = request.getDateFrom();
         dateTo = request.getDateTo();
+        done = request.getDone();
+        value = request.getValue();
     }
 
     public Predicate toPredicate(Root<Order> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(findBySum(root, criteriaBuilder));
         predicates.add(findByDate(root, criteriaBuilder));
+        predicates.add(findByNameOrPhoneNumberOrAddressOrEmail(root, criteriaBuilder));
+        predicates.add(findByDone(root, criteriaBuilder));
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }
 
@@ -62,7 +72,31 @@ public class OrderSpecification implements Specification<Order> {
             predicate = cb.between(r.get("date"), dateFrom, dateTo);
         }
         return predicate;
-//        return cb.equal(r.get("date"), dateTo);
+    }
+
+    private Predicate findByNameOrPhoneNumberOrAddressOrEmail(Root<Order> r, CriteriaBuilder cb) {
+        Predicate predicate;
+        if (value != null && !value.trim().isEmpty()) {
+            return cb.or(
+                    cb.like(r.get("name"), PERCENT + value.trim() + PERCENT),
+                    cb.like(r.get("phoneNumber"), PERCENT + value.trim() + PERCENT),
+                    cb.like(r.get("email"), PERCENT + value.trim() + PERCENT),
+                    cb.like(r.get("address"), PERCENT + value.trim() + PERCENT)
+            );
+        } else {
+            predicate = cb.conjunction();
+        }
+        return predicate;
+    }
+
+    private Predicate findByDone(Root<Order> r, CriteriaBuilder cb) {
+        Predicate predicate;
+        if (done != null) {
+            return done ? cb.isNotNull(r.get("done")) : cb.isNull(r.get("done"));
+        } else {
+            predicate = cb.conjunction();
+        }
+        return predicate;
     }
 
 }

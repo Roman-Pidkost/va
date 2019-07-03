@@ -25,7 +25,7 @@ public class OrderController {
         orderService.save(request);
     }
 
-    @GetMapping
+    @PostMapping("/page")
     public PageResponse<OrderResponse> findAll(OrderSearchRequest request) {
         return orderService.findAll(request);
     }

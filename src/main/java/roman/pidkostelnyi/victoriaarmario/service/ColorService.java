@@ -10,11 +10,8 @@ import roman.pidkostelnyi.victoriaarmario.repository.ColorRepository;
 import roman.pidkostelnyi.victoriaarmario.tool.FileTool;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static roman.pidkostelnyi.victoriaarmario.tool.Constants.USER_HOME;
 
 @Service
 public class ColorService {
@@ -47,7 +44,7 @@ public class ColorService {
     public void delete(Long id) {
         Color color = findOne(id);
         colorRepository.delete(color);
-        Paths.get(System.getProperty(USER_HOME), imgDirectory, color.getImage()).toFile().delete();
+        fileTool.deleteFile(imgDirectory, color.getImage());
     }
 
     public Color findOne(Long id) {

@@ -8,8 +8,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.file.Paths;
 
-import static roman.pidkostelnyi.victoriaarmario.tool.Constants.USER_HOME;
-
 @Configuration
 @EnableWebMvc
 public class StaticResourceConfiguration implements WebMvcConfigurer {
@@ -41,7 +39,7 @@ public class StaticResourceConfiguration implements WebMvcConfigurer {
     }
 
     private String getPath(String directory) {
-        return String.format("file://%s/", Paths.get(System.getProperty(USER_HOME), directory));
+        return Paths.get(System.getProperty("user.home"), directory).toUri().toString();
     }
 }
 

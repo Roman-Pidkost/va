@@ -31,6 +31,9 @@ public class FileTool {
     }
 
     public boolean deleteFile(String directory, String fileName) {
+        if (fileName == null || fileName.isEmpty()) {
+            return true;
+        }
         return Paths.get(System.getProperty(USER_HOME), directory, fileName).toFile().delete();
     }
 
