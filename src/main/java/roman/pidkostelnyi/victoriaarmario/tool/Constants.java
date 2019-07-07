@@ -23,4 +23,6 @@ public class Constants {
     public static final String ORDER_URL = "/order";
     public static final String PRODUCT_URL = "/product";
     public static final String SUBCATEGORY_URL = "/subcategory";
+
+    public static final Double DEFAULT_RATING = 5.0;
 }
