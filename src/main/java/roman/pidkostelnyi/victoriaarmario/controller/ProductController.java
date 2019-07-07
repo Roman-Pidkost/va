@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import roman.pidkostelnyi.victoriaarmario.dto.request.ProductCriteriaRequest;
 import roman.pidkostelnyi.victoriaarmario.dto.request.ProductRequest;
 import roman.pidkostelnyi.victoriaarmario.dto.response.PageResponse;
+import roman.pidkostelnyi.victoriaarmario.dto.response.ProductFullResponse;
 import roman.pidkostelnyi.victoriaarmario.dto.response.ProductResponse;
 import roman.pidkostelnyi.victoriaarmario.service.ProductService;
 
@@ -32,9 +33,19 @@ public class ProductController {
         return productService.findAll();
     }
 
+    @GetMapping("/one")
+    public ProductFullResponse findOneFull(Long id) {
+        return productService.findOneFull(id);
+    }
+
     @PostMapping("/page")
     public PageResponse<ProductResponse> findAllByCriteria(@Valid @RequestBody ProductCriteriaRequest request) {
         return productService.findAll(request);
+    }
+
+    @PutMapping("/selectImage")
+    public void selectImage(Long id, String image) {
+        productService.selectImage(id, image);
     }
 
     @PutMapping

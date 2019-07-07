@@ -25,6 +25,8 @@ public class Product {
     @ElementCollection
     private List<String> images = new ArrayList<>();
 
+    private String mainImage;
+
     @ManyToOne
     private Subcategory subcategory;
 
