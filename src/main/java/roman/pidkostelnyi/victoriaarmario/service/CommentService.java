@@ -61,6 +61,7 @@ public class CommentService {
         }
         comment.setUsername(request.getUsername());
         comment.setText(request.getText());
+        comment.setRating(request.getRating());
         comment.setProduct(productService.findOne(request.getProductId()));
         return comment;
     }

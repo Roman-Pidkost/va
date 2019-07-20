@@ -14,7 +14,7 @@ public class CommentResponse {
     private Long id;
     private String username;
     private String text;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
     private LocalDateTime datePosted;
     private Boolean hidden;
     private Double rating;
