@@ -13,6 +13,8 @@ public class CommentRequest {
     @NotNull
     private String text;
     @NotNull
+    private Double rating;
+    @NotNull
     private Long productId;
     private Boolean hidden;
 }
