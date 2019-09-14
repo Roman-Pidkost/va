@@ -21,6 +21,8 @@ public class Product {
     private String name;
     private Integer price;
     private String description;
+    private String catalogNumber;
+    private String mainImage;
 
     @ElementCollection
     private List<String> images = new ArrayList<>();

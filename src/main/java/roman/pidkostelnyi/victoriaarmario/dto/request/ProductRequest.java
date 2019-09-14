@@ -15,6 +15,7 @@ public class ProductRequest {
     @NotNull
     private Integer price;
     private String description;
+    private String catalogNumber;
     private List<String> images = new ArrayList<>();
     @NotNull
     private Long subcategoryId;

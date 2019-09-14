@@ -14,6 +14,8 @@ public class ProductResponse {
     private String name;
     private Integer price;
     private String description;
+    private String catalogNumber;
+    private String mainImage;
     private List<String> images;
     @JsonProperty("subcategory")
     private SubcategoryResponse subcategoryResponse;
@@ -23,6 +25,8 @@ public class ProductResponse {
         name = product.getName();
         price = product.getPrice();
         description = product.getDescription();
+        catalogNumber = product.getCatalogNumber();
+        mainImage = product.getMainImage();
         images = product.getImages();
         subcategoryResponse = new SubcategoryResponse(product.getSubcategory());
     }
