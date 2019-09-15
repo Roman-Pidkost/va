@@ -17,7 +17,6 @@ public class ProductResponse {
     private String catalogNumber;
     private String mainImage;
     private List<String> images;
-    private String mainImage;
     @JsonProperty("subcategory")
     private SubcategoryResponse subcategoryResponse;
 
@@ -29,7 +28,6 @@ public class ProductResponse {
         catalogNumber = product.getCatalogNumber();
         mainImage = product.getMainImage();
         images = product.getImages();
-        mainImage = product.getMainImage();
         subcategoryResponse = new SubcategoryResponse(product.getSubcategory());
     }
 

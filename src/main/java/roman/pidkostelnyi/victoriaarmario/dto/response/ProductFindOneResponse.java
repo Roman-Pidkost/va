@@ -8,12 +8,15 @@ import roman.pidkostelnyi.victoriaarmario.entity.Product;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static roman.pidkostelnyi.victoriaarmario.tool.Constants.DEFAULT_RATING;
+
 @Getter
 @Setter
 public class ProductFindOneResponse {
     private Long id;
     private String name;
     private Integer price;
+    private Double rating;
     private String description;
     private String catalogNumber;
     private String mainImage;
@@ -33,5 +36,6 @@ public class ProductFindOneResponse {
         images = product.getImages();
         commentResponses = product.getComments().stream().map(CommentResponse::new).collect(Collectors.toList());
         colorResponses = product.getColors().stream().map(ColorResponse::new).collect(Collectors.toList());
+        rating = commentResponses.stream().mapToDouble(CommentResponse::getRating).average().orElse(DEFAULT_RATING);
     }
 }

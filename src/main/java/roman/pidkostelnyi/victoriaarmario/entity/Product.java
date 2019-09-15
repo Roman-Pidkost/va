@@ -20,14 +20,13 @@ public class Product {
     private Long id;
     private String name;
     private Integer price;
+    @Column(columnDefinition = "text")
     private String description;
     private String catalogNumber;
     private String mainImage;
 
     @ElementCollection
     private List<String> images = new ArrayList<>();
-
-    private String mainImage;
 
     @ManyToOne
     private Subcategory subcategory;
