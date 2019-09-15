@@ -2,14 +2,12 @@ package roman.pidkostelnyi.victoriaarmario.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.file.Paths;
 
 @Configuration
-@EnableWebMvc
 public class StaticResourceConfiguration implements WebMvcConfigurer {
 
     @Value("${categories.img.directory}")
@@ -26,13 +24,13 @@ public class StaticResourceConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/images/category/**")
+        registry.addResourceHandler("/api/images/category/**")
                 .addResourceLocations(getPath(categoryImagesDirectoryPath));
-        registry.addResourceHandler("/images/subcategory/**")
+        registry.addResourceHandler("/api/images/subcategory/**")
                 .addResourceLocations(getPath(subcategoryImagesDirectoryPath));
-        registry.addResourceHandler("/images/product/**")
+        registry.addResourceHandler("/api/images/product/**")
                 .addResourceLocations(getPath(productsImagesDirectoryPath));
-        registry.addResourceHandler("/images/color/**")
+        registry.addResourceHandler("/api/images/color/**")
                 .addResourceLocations(getPath(colorsImagesDirectoryPath));
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/META-INF/resources/","classpath:/resources/","classpath:/static/","classpath:/public/");

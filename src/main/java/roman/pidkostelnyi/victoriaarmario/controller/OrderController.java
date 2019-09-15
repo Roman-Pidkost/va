@@ -22,7 +22,7 @@ public class OrderController {
 
     @PostMapping
     public void create(@Valid @RequestBody OrderRequest request) {
-        orderService.save(request);
+        orderService.create(request);
     }
 
     @PostMapping("/page")
