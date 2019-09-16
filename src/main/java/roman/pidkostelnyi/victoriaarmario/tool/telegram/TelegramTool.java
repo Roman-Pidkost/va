@@ -3,6 +3,7 @@ package roman.pidkostelnyi.victoriaarmario.tool.telegram;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import roman.pidkostelnyi.victoriaarmario.entity.Comment;
 import roman.pidkostelnyi.victoriaarmario.entity.Order;
 import roman.pidkostelnyi.victoriaarmario.entity.Product;
 import roman.pidkostelnyi.victoriaarmario.entity.ProductForOrder;
@@ -22,6 +23,11 @@ public class TelegramTool {
         RestTemplate restTemplate = new RestTemplate();
         String url = String.format(URL_TEMPLATE, token, chatId, msg);
         String response = restTemplate.getForObject(url, String.class);
+    }
+
+    public void sendCommentNotification(Comment comment) {
+        String msg = String.format(COMMENT_NOTIFICATION_TEMPLATE, comment.getUsername(), comment.getRating(), comment.getText(), comment.getProduct().getId(), comment.getProduct().getName());
+        sendMsg(token, chatId, msg);
     }
 
     public void sendOrderNotification(Order order) {

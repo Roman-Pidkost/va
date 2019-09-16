@@ -23,6 +23,7 @@ public class OrderResponse {
     private String phoneNumber;
     private String email;
     private String address;
+    private String name;
     private String comment;
     private Long sum;
 
@@ -41,8 +42,10 @@ public class OrderResponse {
         email = order.getEmail();
         address = order.getAddress();
         comment = order.getComment();
+        name = order.getName();
         posted = order.getPosted();
         done = order.getDone();
+        sum = order.getSum();
         productForOrderResponses = order.getProductsForOrder().stream().map(ProductForOrderResponse::new).collect(Collectors.toList());
     }
 }

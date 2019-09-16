@@ -34,7 +34,7 @@ public class ProductFindOneResponse {
         catalogNumber = product.getCatalogNumber();
         mainImage = product.getMainImage();
         images = product.getImages();
-        commentResponses = product.getComments().stream().map(CommentResponse::new).collect(Collectors.toList());
+        commentResponses = product.getComments().stream().filter(e -> !e.getHidden()).map(CommentResponse::new).collect(Collectors.toList());
         colorResponses = product.getColors().stream().map(ColorResponse::new).collect(Collectors.toList());
         rating = commentResponses.stream().mapToDouble(CommentResponse::getRating).average().orElse(DEFAULT_RATING);
     }

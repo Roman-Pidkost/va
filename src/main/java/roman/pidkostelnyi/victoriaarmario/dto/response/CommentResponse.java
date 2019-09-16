@@ -17,7 +17,7 @@ public class CommentResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
     private LocalDateTime datePosted;
     private Boolean hidden;
-    private Double rating;
+    private Integer rating;
 
     public CommentResponse(Comment comment) {
         id = comment.getId();

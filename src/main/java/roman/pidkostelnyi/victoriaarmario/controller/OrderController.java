@@ -26,7 +26,7 @@ public class OrderController {
     }
 
     @PostMapping("/page")
-    public PageResponse<OrderResponse> findAll(OrderSearchRequest request) {
+    public PageResponse<OrderResponse> findAll(@RequestBody OrderSearchRequest request) {
         return orderService.findAll(request);
     }
 

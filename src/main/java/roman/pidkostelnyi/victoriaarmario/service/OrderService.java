@@ -76,6 +76,7 @@ public class OrderService {
     private void save(Order order, OrderRequest request) {
         final Order savedOrder = orderRepository.save(orderRequestToOrder(order, request));
         List<ProductForOrder> orderItems = saveProductsForOrder(savedOrder, request);
+        savedOrder.setProductsForOrder(orderItems);
         final long sum = orderItems.stream().mapToLong(e -> e.getCount() * e.getProduct().getPrice()).sum();
         savedOrder.setSum(sum);
         orderRepository.save(savedOrder);

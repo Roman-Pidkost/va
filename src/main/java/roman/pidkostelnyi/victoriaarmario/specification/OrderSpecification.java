@@ -4,13 +4,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import roman.pidkostelnyi.victoriaarmario.dto.request.OrderSearchRequest;
 import roman.pidkostelnyi.victoriaarmario.entity.Order;
+import roman.pidkostelnyi.victoriaarmario.tool.Utils;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static roman.pidkostelnyi.victoriaarmario.tool.Constants.PERCENT;
@@ -21,8 +22,8 @@ public class OrderSpecification implements Specification<Order> {
     private Long minSum;
     private Long maxSum;
 
-    private Date dateFrom;
-    private Date dateTo;
+    private LocalDateTime dateFrom;
+    private LocalDateTime dateTo;
 
     private String value;
 
@@ -31,8 +32,8 @@ public class OrderSpecification implements Specification<Order> {
     public OrderSpecification(OrderSearchRequest request) {
         minSum = request.getMinSum();
         maxSum = request.getMaxSum();
-        dateFrom = request.getDateFrom();
-        dateTo = request.getDateTo();
+        dateFrom = Utils.dateToLocalDate(request.getDateFrom());
+        dateTo = Utils.dateToLocalDate(request.getDateTo());
         done = request.getDone();
         value = request.getValue();
     }
@@ -65,11 +66,11 @@ public class OrderSpecification implements Specification<Order> {
         if (dateFrom == null && dateTo == null) {
             predicate = cb.conjunction();
         } else if (dateTo == null) {
-            predicate = cb.greaterThanOrEqualTo(r.get("date"), dateFrom);
+            predicate = cb.greaterThanOrEqualTo(r.get("posted"), dateFrom);
         } else if (dateFrom == null) {
-            predicate = cb.lessThanOrEqualTo(r.get("date"), dateTo);
+            predicate = cb.lessThanOrEqualTo(r.get("posted"), dateTo);
         } else {
-            predicate = cb.between(r.get("date"), dateFrom, dateTo);
+            predicate = cb.between(r.get("posted"), dateFrom, dateTo);
         }
         return predicate;
     }
