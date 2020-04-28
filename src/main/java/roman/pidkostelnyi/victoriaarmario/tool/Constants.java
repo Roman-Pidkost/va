@@ -17,10 +17,12 @@ public class Constants {
     public static final String FIELD_SUBCATEGORY = "subcategory";
     public static final String FIELD_CATEGORY = "category";
 
-    public static final String CATEGORY_URL = "/category";
-    public static final String COLOR_URL = "/color";
-    public static final String COMMENT_URL = "/comment";
-    public static final String ORDER_URL = "/order";
-    public static final String PRODUCT_URL = "/product";
-    public static final String SUBCATEGORY_URL = "/subcategory";
+    public static final String CATEGORY_URL = "/api/category";
+    public static final String COLOR_URL = "/api/color";
+    public static final String COMMENT_URL = "/api/comment";
+    public static final String ORDER_URL = "/api/order";
+    public static final String PRODUCT_URL = "/api/product";
+    public static final String SUBCATEGORY_URL = "/api/subcategory";
+
+    public static final Double DEFAULT_RATING = 5.0;
 }

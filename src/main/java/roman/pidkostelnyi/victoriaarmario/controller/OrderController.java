@@ -22,11 +22,11 @@ public class OrderController {
 
     @PostMapping
     public void create(@Valid @RequestBody OrderRequest request) {
-        orderService.save(request);
+        orderService.create(request);
     }
 
     @PostMapping("/page")
-    public PageResponse<OrderResponse> findAll(OrderSearchRequest request) {
+    public PageResponse<OrderResponse> findAll(@RequestBody OrderSearchRequest request) {
         return orderService.findAll(request);
     }
 

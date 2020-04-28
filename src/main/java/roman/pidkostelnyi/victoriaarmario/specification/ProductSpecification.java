@@ -36,6 +36,7 @@ public class ProductSpecification implements Specification<Product> {
         predicates.add(findByNameLike(root, criteriaBuilder));
         predicates.add(findByColors(root, criteriaBuilder));
         predicates.add(findByPrice(root, criteriaBuilder));
+        predicates.add(findByCategoryAndSubcategory(root, criteriaBuilder));
         return criteriaBuilder.and(predicates.toArray(new Predicate[]{}));
     }
 
@@ -53,7 +54,7 @@ public class ProductSpecification implements Specification<Product> {
         Predicate predicate;
 
         final Join<Product, Subcategory> subcategoryJoin = r.join(FIELD_SUBCATEGORY);
-        final Join<Subcategory, Category> categoryJoin = r.join(FIELD_CATEGORY);
+        final Join<Subcategory, Category> categoryJoin = subcategoryJoin.join(FIELD_CATEGORY);
 
         if (subcategoryId != null) {
             predicate = cb.equal(subcategoryJoin.get("id"), subcategoryId);

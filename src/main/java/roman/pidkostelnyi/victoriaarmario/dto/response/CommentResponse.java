@@ -14,9 +14,10 @@ public class CommentResponse {
     private Long id;
     private String username;
     private String text;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
     private LocalDateTime datePosted;
     private Boolean hidden;
+    private Integer rating;
 
     public CommentResponse(Comment comment) {
         id = comment.getId();
@@ -24,5 +25,6 @@ public class CommentResponse {
         text = comment.getText();
         datePosted = comment.getDatePosted();
         hidden = comment.getHidden();
+        rating = comment.getRating();
     }
 }

@@ -6,6 +6,7 @@ import roman.pidkostelnyi.victoriaarmario.dto.request.CommentRequest;
 import roman.pidkostelnyi.victoriaarmario.dto.response.CommentResponse;
 import roman.pidkostelnyi.victoriaarmario.entity.Comment;
 import roman.pidkostelnyi.victoriaarmario.repository.CommentRepository;
+import roman.pidkostelnyi.victoriaarmario.tool.telegram.TelegramTool;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -23,8 +24,12 @@ public class CommentService {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private TelegramTool telegramTool;
+
     public void save(CommentRequest request) {
-        commentRepository.save(commentRequestToComment(null, request));
+        Comment comment = commentRepository.save(commentRequestToComment(null, request));
+        telegramTool.sendCommentNotification(comment);
     }
 
     public List<CommentResponse> findAll() {
@@ -61,6 +66,7 @@ public class CommentService {
         }
         comment.setUsername(request.getUsername());
         comment.setText(request.getText());
+        comment.setRating(request.getRating());
         comment.setProduct(productService.findOne(request.getProductId()));
         return comment;
     }
