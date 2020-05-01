@@ -11,7 +11,7 @@ import javax.validation.Valid;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
@@ -29,22 +29,5 @@ public class UserController {
 
     @GetMapping("/checkToken")
     public void checkToken() {
-    }
-
-    @PostMapping("/secured")
-    public void test() {
-
-    }
-
-    @PreAuthorize("hasAnyAuthority('USER')")
-    @GetMapping("/secured1")
-    public void test1() {
-
-    }
-
-    @PreAuthorize("hasAnyRole('USER')")
-    @GetMapping("/secured2")
-    public void test2() {
-
     }
 }
