@@ -32,7 +32,7 @@ public class StaticResourceConfiguration implements WebMvcConfigurer {
                 .addResourceLocations(getPath(productsImagesDirectoryPath));
         registry.addResourceHandler("/api/images/color/**")
                 .addResourceLocations(getPath(colorsImagesDirectoryPath));
-        registry.addResourceHandler("/**")
+        registry.addResourceHandler("/api/**")
                 .addResourceLocations("classpath:/META-INF/resources/","classpath:/resources/","classpath:/static/","classpath:/public/");
     }
 

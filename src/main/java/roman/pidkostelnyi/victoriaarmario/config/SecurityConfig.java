@@ -38,11 +38,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/user/login", "/api/user/register").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/product/page").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/user/checkToken").hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.GET).permitAll()
                 .antMatchers("/api/images/**").permitAll()
 //                .anyRequest().permitAll()
-                .anyRequest().hasAnyRole("USER")
+                .anyRequest().hasAnyRole("ADMIN")
                 .and()
                 .apply(new JwtConfigure(jwtTokenTool));
     }

@@ -13,28 +13,28 @@ import static roman.pidkostelnyi.victoriaarmario.tool.telegram.TelegramConstants
 @Component
 public class TelegramTool {
 
-    @Value("${telegram.chat.id}")
+//    @Value("${telegram.chat.id}")
     private String chatId;
 
-    @Value("${telegram.token}")
+//    @Value("${telegram.token}")
     private String token;
 
     public void sendMsg(String token, String chatId, String msg) {
-        RestTemplate restTemplate = new RestTemplate();
-        String url = String.format(URL_TEMPLATE, token, chatId, msg);
-        String response = restTemplate.getForObject(url, String.class);
+//        RestTemplate restTemplate = new RestTemplate();
+//        String url = String.format(URL_TEMPLATE, token, chatId, msg);
+//        String response = restTemplate.getForObject(url, String.class);
     }
 
     public void sendCommentNotification(Comment comment) {
-        String msg = String.format(COMMENT_NOTIFICATION_TEMPLATE, comment.getUsername(), comment.getRating(), comment.getText(), comment.getProduct().getId(), comment.getProduct().getName());
-        sendMsg(token, chatId, msg);
+//        String msg = String.format(COMMENT_NOTIFICATION_TEMPLATE, comment.getUsername(), comment.getRating(), comment.getText(), comment.getProduct().getId(), comment.getProduct().getName());
+//        sendMsg(token, chatId, msg);
     }
 
     public void sendOrderNotification(Order order) {
-        StringBuilder sb = new StringBuilder();
-        order.getProductsForOrder().stream().map(this::orderItemToStringForNotification).forEach(sb::append);
-        final String orderMsg = String.format(ORDER_NOTIFICATION_TEMPLATE, order.getId(), order.getName(), order.getPhoneNumber(), sb.toString(), order.getComment(), order.getSum());
-        sendMsg(token, chatId, orderMsg);
+//        StringBuilder sb = new StringBuilder();
+//        order.getProductsForOrder().stream().map(this::orderItemToStringForNotification).forEach(sb::append);
+//        final String orderMsg = String.format(ORDER_NOTIFICATION_TEMPLATE, order.getId(), order.getName(), order.getPhoneNumber(), sb.toString(), order.getComment(), order.getSum());
+//        sendMsg(token, chatId, orderMsg);
     }
 
     private String orderItemToStringForNotification(ProductForOrder productForOrder) {
